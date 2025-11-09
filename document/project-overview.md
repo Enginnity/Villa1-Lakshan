@@ -59,6 +59,54 @@ Visit `http://localhost:3000`.
 ## Assets & Imagery
 Public images highlight Galle Fort, Rumassala, Mirissa, and curated villa interiors. Two custom flag assets (`flag-us.png`, `flag-sri-lanka.png`) power the currency selector.
 
+## Application Map
+
+### Pages & Layout
+- `app/layout.tsx` – Root layout, font setup, metadata, Vercel analytics.
+- `app/page.tsx` – Main landing page composing navigation, hero, content sections, footer, and WhatsApp button within `CurrencyProvider`.
+
+### API Routes
+- `app/api/contact/route.ts`
+  - `POST` handler validates inquiry payload, sends admin email, then awaits guest confirmation email.
+- `app/api/exchange-rate/route.ts`
+  - `GET` handler fetches live USD→LKR rate via multiple providers with graceful fallback.
+
+### Core Components
+- `components/navigation.tsx` – Responsive nav bar with desktop menu, animated mobile drawer, currency selector integration.
+- `components/currency-selector.tsx` – Flag-based dropdown with outside-click handling and animated listbox.
+- `components/currency-provider.tsx` – Context provider exposing `currency`, `formatPrice`, `convertToLKR`, `toggleCurrency`, and rate state.
+- `components/hero.tsx` – Parallax hero banner with primary CTAs.
+- `components/about.tsx` – Galle Fort story section with highlights grid.
+- `components/rooms.tsx` – Room catalog with currency-aware pricing, amenity list, stale-rate notice.
+- `components/gallery.tsx` – Photo grid with scroll animations and lightbox viewer.
+- `components/reviews.tsx` – Guest testimonials with star ratings.
+- `components/attractions.tsx` – Nearby experiences grid.
+- `components/contact.tsx` – Contact/booking form with loader, success auto-dismiss, error states.
+- `components/footer.tsx` – Single-line copyright and Enginnity credit.
+- `components/whatsapp-button.tsx` – Floating WhatsApp quick-action button.
+
+### Hooks & Utilities
+- `hooks/use-mobile.ts`, `components/use-mobile.tsx` – Responsive helper for UI library.
+- `hooks/use-toast.ts`, `components/use-toast.ts` – Toast utilities from UI kit.
+- `lib/utils.ts` – Shared helpers (class name merging, etc.).
+
+### UI Library (Shadcn-Based)
+Reusable elements under `components/ui/` such as `button`, `dialog`, `accordion`, `carousel`, `tabs`, etc., available for future expansion (current pages use a subset directly).
+
+### Context Functions (from `CurrencyProvider`)
+- `formatPrice(usdAmount, options)` – Returns formatted string in active currency.
+- `convertToLKR(usdAmount)` – Converts USD value using cached rate.
+- `toggleCurrency()` / `setCurrency(code)` – Switch active currency.
+- State values: `currency`, `rate`, `isLoading`, `isStale`, `error`, `lastUpdated`.
+
+### Feature Checklist
+- ✅ Parallax hero, scroll-triggered fades, animated mobile drawer.
+- ✅ Live USD↔LKR conversion with caching & fallback.
+- ✅ Flag-based currency toggle (desktop + mobile header).
+- ✅ Responsive rooms grid, gallery lightbox, testimonials, attractions.
+- ✅ Contact form: phone field, loader, inline success/error, Nodemailer admin + guest email.
+- ✅ Floating WhatsApp contact, footer attribution, Vercel analytics hook.
+
 ## Maintenance Tips
 - Refresh currency providers if rate accuracy becomes critical.
 - Monitor Gmail quota/security logs for API emails.
