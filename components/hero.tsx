@@ -35,11 +35,14 @@ export default function Hero() {
       <div className="relative h-full flex flex-col items-center justify-center text-center px-4">
         <div className="animate-fadeInUp space-y-4 md:space-y-6 max-w-4xl">
           <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white text-balance leading-tight">
-            Sunset Villa Sri Lanka
+            Sunset Villa Galle Fort
           </h1>
-          <p className="text-lg sm:text-xl md:text-2xl text-white/90 text-balance">Luxury Stay by the Ocean</p>
+          <p className="text-lg sm:text-xl md:text-2xl text-white/90 text-balance">
+            Boutique luxury inside Sri Lanka&apos;s UNESCO heritage city
+          </p>
           <p className="text-base sm:text-lg text-white/80 max-w-2xl mx-auto leading-relaxed">
-            Experience the unparalleled tropical beauty of Sri Lanka's pristine coastline with world-class amenities
+            Wake to the sound of the Indian Ocean, wander centuries-old ramparts, and unwind with curated comforts crafted
+            for discerning global travellers.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center pt-6 md:pt-8">
@@ -47,7 +50,7 @@ export default function Hero() {
               href="tel:+94771234567"
               className="px-8 md:px-10 py-3 md:py-4 bg-primary text-primary-foreground rounded-full font-semibold hover:bg-primary/90 transition transform hover:scale-105 text-sm md:text-base"
             >
-              Call Now
+              Call for Inquiry
             </a>
             <a
               href="https://wa.me/94771234567"

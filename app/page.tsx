@@ -10,6 +10,8 @@ import Reviews from "@/components/reviews"
 import Attractions from "@/components/attractions"
 import Contact from "@/components/contact"
 import WhatsAppButton from "@/components/whatsapp-button"
+import { CurrencyProvider } from "@/components/currency-provider"
+import Footer from "@/components/footer"
 
 export default function Home() {
   const [scrolled, setScrolled] = useState(false)
@@ -33,16 +35,19 @@ export default function Home() {
   }, [])
 
   return (
-    <main className="min-h-screen bg-background">
-      <Navigation scrolled={scrolled} />
-      <Hero />
-      <About />
-      <Rooms />
-      <Gallery />
-      <Reviews />
-      <Attractions />
-      <Contact />
-      <WhatsAppButton />
-    </main>
+    <CurrencyProvider>
+      <main className="min-h-screen bg-background">
+        <Navigation scrolled={scrolled} />
+        <Hero />
+        <About />
+        <Rooms />
+        <Gallery />
+        <Reviews />
+        <Attractions />
+        <Contact />
+        <Footer />
+        <WhatsAppButton />
+      </main>
+    </CurrencyProvider>
   )
 }

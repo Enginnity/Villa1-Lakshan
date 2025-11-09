@@ -3,34 +3,34 @@
 export default function Attractions() {
   const attractions = [
     {
-      name: "Mirissa Beach",
-      distance: "5 km away",
-      description: "Pristine sandy beach perfect for swimming and whale watching",
-      image: "/mirissa-beach-sri-lanka.jpg",
-    },
-    {
-      name: "Galle Fort",
-      distance: "15 km away",
-      description: "Historic UNESCO World Heritage site with stunning architecture",
+      name: "Galle Dutch Fort Ramparts",
+      distance: "Paces from your door",
+      description: "Sunset strolls along UNESCO-listed walls with sweeping ocean panoramas",
       image: "/galle-fort-sri-lanka.jpg",
     },
     {
-      name: "Unawatuna Beach",
-      distance: "12 km away",
-      description: "Scenic beach with coral reefs ideal for snorkeling",
+      name: "Galle Lighthouse",
+      distance: "0.5 km away",
+      description: "Iconic colonial-era beacon overlooking palm-fringed coves",
+      image: "/luxury-villa-sunset-view.jpg",
+    },
+    {
+      name: "Jungle Beach, Rumassala",
+      distance: "4 km away",
+      description: "Hidden turquoise bay ideal for snorkelling and relaxed swims",
       image: "/unawatuna-beach-sri-lanka.jpg",
     },
     {
-      name: "Jungle Trekking",
-      distance: "20 km away",
-      description: "Explore lush tropical forests and spot exotic wildlife",
+      name: "Koggala Lake Cruise",
+      distance: "12 km away",
+      description: "Sunrise boat safaris through cinnamon islands and bird sanctuaries",
       image: "/jungle-trek-sri-lanka.jpg",
     },
     {
-      name: "Local Markets",
-      distance: "3 km away",
-      description: "Vibrant markets with fresh produce and local crafts",
-      image: "/sri-lanka-local-market.jpg",
+      name: "Mirissa Whale Watching",
+      distance: "35 km away",
+      description: "Set sail at dawn to spot blue whales and playful dolphins offshore",
+      image: "/mirissa-beach-sri-lanka.jpg",
     },
   ]
 

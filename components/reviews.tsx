@@ -5,27 +5,27 @@ import { Star } from "lucide-react"
 export default function Reviews() {
   const reviews = [
     {
-      name: "Sarah Johnson",
+      name: "Sarah Johnson · United Kingdom",
       rating: 5,
-      text: "An absolutely stunning villa with breathtaking ocean views. The staff was incredibly attentive and the amenities exceeded our expectations.",
+      text: "The location is unbeatable—breakfast on the terrace, then straight into the Fort for boutique shopping. The concierge crafted a brilliant itinerary to explore Galle like a local.",
       image: "/woman-profile.png",
     },
     {
-      name: "Michael Chen",
+      name: "Michael Chen · Singapore",
       rating: 5,
-      text: "Best vacation ever! The private pool, beach access, and sunset views made this an unforgettable experience. Highly recommended!",
+      text: "Loved switching between USD and LKR pricing; everything felt effortless. Sunset cocktails on the ramparts and the villa&apos;s private chef were highlights of our Sri Lanka journey.",
       image: "/man-profile.png",
     },
     {
-      name: "Emma Williams",
+      name: "Emma Williams · Australia",
       rating: 5,
-      text: "Luxury at its finest. Every detail was perfect, from the room decor to the personalized service. We will definitely return!",
+      text: "Every detail echoed the charm of Galle Fort—heritage design, jasmine-scented evenings, and beach picnics arranged in minutes. The team anticipates every need.",
       image: "/profile-photo-woman-2.jpg",
     },
     {
-      name: "David Martinez",
+      name: "David Martinez · Spain",
       rating: 5,
-      text: "The villa exceeded all our expectations. Beautiful location, impeccable service, and amazing food. Worth every penny!",
+      text: "Exceptional service from arrival. Our family enjoyed cycling tours, a Koggala Lake cruise, and relaxed afternoons by the courtyard pool. We&apos;re already planning our return.",
       image: "/profile-photo-man-2.jpg",
     },
   ]

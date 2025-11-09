@@ -2,31 +2,69 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Mail, Phone, MapPin } from "lucide-react"
 
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    checkIn: "",
-    checkOut: "",
+    phone: "",
     message: "",
   })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle")
+  const [errorMessage, setErrorMessage] = useState<string>("")
+  const [successVisible, setSuccessVisible] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission
-    console.log("Form submitted:", formData)
-    alert("Thank you for your inquiry! We will contact you soon.")
-    setFormData({ name: "", email: "", checkIn: "", checkOut: "", message: "" })
+    setIsSubmitting(true)
+    setStatus("idle")
+    setErrorMessage("")
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({}))
+        throw new Error(data?.error || "Something went wrong")
+      }
+
+      setStatus("success")
+      setFormData({ name: "", email: "", phone: "", message: "" })
+      setSuccessVisible(true)
+    } catch (error) {
+      console.error(error)
+      setStatus("error")
+      setErrorMessage(error instanceof Error ? error.message : "Unable to send message.")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
+
+  useEffect(() => {
+    if (status === "success" && successVisible) {
+      const timeoutId = window.setTimeout(() => {
+        setSuccessVisible(false)
+        setStatus("idle")
+      }, 5000)
+
+      return () => window.clearTimeout(timeoutId)
+    }
+  }, [status, successVisible])
 
   return (
     <section id="contact" className="py-16 md:py-20 px-4 bg-card/50">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12 md:mb-16 scroll-fade">
-          <p className="text-primary font-semibold mb-2 text-sm md:text-base">Get In Touch</p>
+          <p className="text-primary font-semibold mb-2 text-sm md:text-base">Plan Your Galle Escape</p>
           <h2 className="text-3xl md:text-5xl font-bold text-foreground">Contact & Booking</h2>
         </div>
 
@@ -65,9 +103,9 @@ export default function Contact() {
                   <div>
                     <p className="font-semibold text-foreground text-sm md:text-base">Location</p>
                     <p className="text-muted-foreground text-sm md:text-base">
-                      Mirissa, Southern Coast
+                      Sunset Villa, Rampart Street
                       <br />
-                      Sri Lanka
+                      Galle Fort 80000, Sri Lanka
                     </p>
                   </div>
                 </div>
@@ -77,7 +115,7 @@ export default function Contact() {
             {/* Map */}
             <div className="rounded-2xl overflow-hidden h-64 md:h-80">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3967.0754842844937!2d80.47!3d5.94!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae1a3c3c3c3c3c3%3A0x3c3c3c3c3c3c3c3c!2sMirissa%2C%20Sri%20Lanka!5e0!3m2!1sen!2sus!4v1234567890"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3944.07917296876!2d80.2153345!3d6.0307026!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae173f7aff0b2dd%3A0x67f3c0a8f9ad7889!2sGalle%20Fort!5e0!3m2!1sen!2slk!4v1731146400000!5m2!1sen!2slk"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
@@ -116,25 +154,19 @@ export default function Contact() {
                 />
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-semibold text-foreground mb-2">Check-in</label>
+              <div>
+                <label className="block text-sm font-semibold text-foreground mb-2">Phone / WhatsApp</label>
+                <div className="relative">
+                  <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-sm font-semibold text-muted-foreground">
+                    +94
+                  </div>
                   <input
-                    type="date"
+                    type="tel"
                     required
-                    value={formData.checkIn}
-                    onChange={(e) => setFormData({ ...formData, checkIn: e.target.value })}
-                    className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-sm md:text-base"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-foreground mb-2">Check-out</label>
-                  <input
-                    type="date"
-                    required
-                    value={formData.checkOut}
-                    onChange={(e) => setFormData({ ...formData, checkOut: e.target.value })}
-                    className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-sm md:text-base"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    className="w-full pl-16 pr-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-sm md:text-base"
+                    placeholder="77 123 4567"
                   />
                 </div>
               </div>
@@ -152,10 +184,31 @@ export default function Contact() {
 
               <button
                 type="submit"
-                className="w-full py-3 md:py-4 px-4 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition text-sm md:text-base"
+                disabled={isSubmitting}
+                className="w-full py-3 md:py-4 px-4 bg-primary text-primary-foreground rounded-lg font-semibold transition text-sm md:text-base disabled:cursor-not-allowed disabled:opacity-80"
               >
-                Send Inquiry
+                {isSubmitting ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <span className="h-3 w-3 animate-ping rounded-full bg-white" />
+                    Sending...
+                  </span>
+                ) : (
+                  "Send Inquiry"
+                )}
               </button>
+
+              {status === "success" && successVisible && (
+                <div className="flex items-center gap-3 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-900 shadow-sm">
+                  <div className="h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                  <span>Thank you for your inquiry! Our reservations team will reach out shortly.</span>
+                </div>
+              )}
+              {status === "error" && (
+                <div className="flex items-center gap-3 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-900 shadow-sm">
+                  <div className="h-2.5 w-2.5 rounded-full bg-red-500 animate-pulse" />
+                  <span>{errorMessage}</span>
+                </div>
+              )}
             </form>
           </div>
         </div>

@@ -1,40 +1,74 @@
 "use client"
 
+import { useMemo } from "react"
+
+import { useCurrency } from "./currency-provider"
+
+interface Room {
+  name: string
+  size: string
+  beds: string
+  features: string[]
+  priceUSD: number
+  image: string
+}
+
 export default function Rooms() {
-  const rooms = [
-    {
-      name: "Ocean View Suite",
-      size: "45 m²",
-      beds: "King Bed",
-      features: ["AC", "Private Balcony", "Ocean View", "Ensuite Bathroom"],
-      price: "$180/night",
-      image: "/room-ocean-view.jpg",
-    },
-    {
-      name: "Tropical Deluxe",
-      size: "55 m²",
-      beds: "King + Twin Beds",
-      features: ["AC", "Garden View", "Jacuzzi", "Walk-in Closet"],
-      price: "$220/night",
-      image: "/room-tropical-deluxe.jpg",
-    },
-    {
-      name: "Beach Villa",
-      size: "75 m²",
-      beds: "2 King Beds",
-      features: ["AC", "Private Pool", "Beach Access", "Full Kitchen"],
-      price: "$350/night",
-      image: "/room-beach-villa.jpg",
-    },
-    {
-      name: "Sunset Penthouse",
-      size: "100 m²",
-      beds: "2 King + Living Area",
-      features: ["AC", "Infinity Pool", "Sunset View", "Premium Amenities"],
-      price: "$500/night",
-      image: "/room-sunset-penthouse.jpg",
-    },
-  ]
+  const { currency, formatPrice, convertToLKR, isLoading, isStale } = useCurrency()
+
+  const rooms: Room[] = useMemo(
+    () => [
+      {
+        name: "Ocean View Suite",
+        size: "45 m²",
+        beds: "King Bed",
+        features: ["AC", "Private Balcony", "Ocean + Fort View", "Ensuite Bathroom"],
+        priceUSD: 180,
+        image: "/room-ocean-view.jpg",
+      },
+      {
+        name: "Tropical Deluxe",
+        size: "55 m²",
+        beds: "King + Twin Beds",
+        features: ["AC", "Verdant Courtyard Outlook", "Jacuzzi", "Walk-in Wardrobe"],
+        priceUSD: 220,
+        image: "/room-tropical-deluxe.jpg",
+      },
+      {
+        name: "Beach Villa",
+        size: "75 m²",
+        beds: "2 King Beds",
+        features: ["AC", "Private Plunge Pool", "Direct Rampart Access", "Full Kitchen"],
+        priceUSD: 350,
+        image: "/room-beach-villa.jpg",
+      },
+      {
+        name: "Sunset Penthouse",
+        size: "100 m²",
+        beds: "2 King + Living Area",
+        features: ["AC", "Panoramic Terrace", "Sunset Butler Service", "Premium Amenities"],
+        priceUSD: 500,
+        image: "/room-sunset-penthouse.jpg",
+      },
+    ],
+    [],
+  )
+
+  const formatSecondaryPrice = (usdAmount: number) => {
+    if (currency === "USD") {
+      const lkr = convertToLKR(usdAmount)
+      return `≈ Rs ${new Intl.NumberFormat("en-LK", {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+      }).format(lkr)}`
+    }
+
+    return `≈ ${new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      minimumFractionDigits: 0,
+    }).format(usdAmount)}`
+  }
 
   return (
     <section id="rooms" className="py-16 md:py-24 px-4 bg-background">
@@ -62,7 +96,20 @@ export default function Rooms() {
               />
               <div className="p-6 md:p-8 flex flex-col flex-grow">
                 <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-2">{room.name}</h3>
-                <p className="text-primary font-bold text-lg mb-6">{room.price}</p>
+                <div className="mb-6 space-y-1">
+                  <p className="text-primary font-bold text-lg md:text-xl">
+                    {formatPrice(room.priceUSD)} <span className="text-sm font-semibold text-muted-foreground">/ night</span>
+                  </p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wide">
+                    {formatSecondaryPrice(room.priceUSD)}
+                    {isLoading && <span className="ml-1 text-[11px] lowercase text-primary">updating…</span>}
+                  </p>
+                  {isStale && !isLoading && (
+                    <p className="text-[11px] text-muted-foreground tracking-wide">
+                      Reference rate refreshed daily.
+                    </p>
+                  )}
+                </div>
 
                 <div className="space-y-3 mb-6 flex-grow">
                   <p className="text-sm text-muted-foreground">

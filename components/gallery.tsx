@@ -8,12 +8,12 @@ export default function Gallery() {
   const [animatedImages, setAnimatedImages] = useState<Set<number>>(new Set())
 
   const images = [
-    { src: "/luxury-villa-pool-area.jpg", alt: "Pool Area" },
-    { src: "/luxury-villa-dining-room.jpg", alt: "Dining Area" },
-    { src: "/luxury-villa-bedroom-interior.jpg", alt: "Bedroom" },
-    { src: "/luxury-villa-beach-view.jpg", alt: "Beach View" },
-    { src: "/luxury-villa-garden-landscape.jpg", alt: "Garden" },
-    { src: "/luxury-villa-sunset-view.jpg", alt: "Sunset" },
+    { src: "/galle-fort-sri-lanka.jpg", alt: "Sunset atop the Galle Fort ramparts" },
+    { src: "/luxury-villa-pool-area.jpg", alt: "Private plunge pool overlooking the ocean" },
+    { src: "/luxury-villa-dining-room.jpg", alt: "Candlelit dining in the heritage courtyard" },
+    { src: "/luxury-villa-bedroom-interior.jpg", alt: "Suite with colonial-inspired interiors" },
+    { src: "/luxury-villa-beach-view.jpg", alt: "Crescent beaches moments from the villa" },
+    { src: "/luxury-villa-sunset-view.jpg", alt: "Twilight sky over Galle Harbour" },
   ]
 
   useEffect(() => {

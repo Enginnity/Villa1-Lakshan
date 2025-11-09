@@ -8,8 +8,8 @@ export default function About() {
           {/* Image */}
           <div className="scroll-fade">
             <img
-              src="/luxury-villa-exterior-with-tropical-garden.jpg"
-              alt="Villa exterior"
+              src="/luxury-villa-garden-landscape.jpg"
+              alt="Sunset Villa courtyard inside Galle Fort"
               className="rounded-3xl shadow-2xl w-full"
             />
           </div>
@@ -18,14 +18,15 @@ export default function About() {
           <div className="scroll-fade space-y-6">
             <div>
               <p className="text-primary font-semibold mb-3 text-sm md:text-base uppercase tracking-wide">
-                The Unmatched Beauty
+                Stories Beyond the Ramparts
               </p>
-              <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4 leading-tight">Of the Archipelago</h2>
+              <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4 leading-tight">Life at Galle Fort</h2>
             </div>
 
             <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-              Discover the unparalleled natural beauty of Sri Lanka's pristine coastline. Sunset Villa offers an
-              exclusive retreat where luxury meets nature, providing an unforgettable experience by the ocean.
+              Discover Galle&apos;s evocative blend of Dutch, Portuguese, and Sri Lankan heritage from the comfort of our
+              private villa. Sunset Villa pairs design-led interiors with signature hosting, moments from cafes, galleries,
+              and golden beaches.
             </p>
 
             <div className="grid grid-cols-3 gap-4 md:gap-6 pt-6">
@@ -47,19 +48,19 @@ export default function About() {
               <div className="flex items-start gap-4">
                 <div className="w-2 h-2 bg-primary rounded-full flex-shrink-0 mt-2" />
                 <span className="text-foreground text-sm md:text-base leading-relaxed">
-                  Private infinity pool overlooking the ocean
+                  Rooftop infinity plunge overlooking the Indian Ocean
                 </span>
               </div>
               <div className="flex items-start gap-4">
                 <div className="w-2 h-2 bg-primary rounded-full flex-shrink-0 mt-2" />
                 <span className="text-foreground text-sm md:text-base leading-relaxed">
-                  Direct beach access with pristine sand
+                  Curated walking tours and history-led experiences
                 </span>
               </div>
               <div className="flex items-start gap-4">
                 <div className="w-2 h-2 bg-primary rounded-full flex-shrink-0 mt-2" />
                 <span className="text-foreground text-sm md:text-base leading-relaxed">
-                  Lush tropical garden with exotic plants
+                  Tropical courtyard dining with seasonal Sri Lankan cuisine
                 </span>
               </div>
             </div>

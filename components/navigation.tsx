@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { Menu, X } from "lucide-react"
+import CurrencySelector from "./currency-selector"
 
 interface NavigationProps {
   scrolled: boolean
@@ -69,6 +70,7 @@ export default function Navigation({ scrolled }: NavigationProps) {
           </div>
 
           <div className="hidden md:flex gap-4 items-center">
+            <CurrencySelector />
             <a
               href="tel:+94771234567"
               className="px-6 py-2.5 bg-primary text-primary-foreground rounded-full hover:bg-primary/90 transition text-sm md:text-base font-medium"
@@ -113,6 +115,8 @@ export default function Navigation({ scrolled }: NavigationProps) {
             >
               Contact
             </button>
+            <label className="block text-xs font-semibold text-muted-foreground px-4">Currency</label>
+            <CurrencySelector align="left" buttonSize="sm" />
             <a
               href="tel:+94771234567"
               className="block w-full text-center px-4 py-3 bg-primary text-primary-foreground rounded mt-2 text-sm font-medium"
