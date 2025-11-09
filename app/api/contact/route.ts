@@ -58,7 +58,7 @@ ${message}
       subject: "We received your inquiry",
       html: `
         <div style="font-family: 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #1f2933;">
-          <h2 style="color: #0b5d5c;">Ayubowan ${name.split(" ")[0] || ""},</h2>
+          <h2 style="color: #0b5d5c;">Hi ${name.split(" ")[0] || ""},</h2>
           <p>
             Thank you for contacting Sunset Villa inside the historic Galle Fort. Our reservations team is reviewing your
             message and will be in touch within 24 hours.
