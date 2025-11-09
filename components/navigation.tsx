@@ -24,7 +24,7 @@ export default function Navigation({ scrolled }: NavigationProps) {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-16 gap-3">
           <div className="flex items-center">
             <h1
               className={`text-xl md:text-2xl font-bold transition-colors ${scrolled ? "text-primary" : "text-white"}`}
@@ -80,49 +80,44 @@ export default function Navigation({ scrolled }: NavigationProps) {
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            className={`md:hidden p-2 transition ${scrolled ? "text-foreground" : "text-white"}`}
-            onClick={() => setMobileOpen(!mobileOpen)}
-          >
-            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          <div className="flex items-center gap-3 md:hidden">
+            <CurrencySelector buttonSize="sm" align="right" />
+            <button
+              className={`p-2 transition ${scrolled ? "text-foreground" : "text-white"}`}
+              onClick={() => setMobileOpen(!mobileOpen)}
+            >
+              {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Menu */}
         {mobileOpen && (
-          <div className="md:hidden pb-4 space-y-2 bg-white/95">
+          <div className="md:hidden pb-4 space-y-2 bg-white/95 rounded-3xl border border-border/50 shadow-2xl mx-2 mt-2 overflow-hidden backdrop-blur animate-[mobileMenuEnter_0.28s_ease-out]">
             <button
               onClick={() => scrollToSection("about")}
-              className="block w-full text-left px-4 py-3 hover:bg-muted rounded text-sm text-foreground"
+              className="block w-full text-left px-4 py-3 hover:bg-muted/80 text-sm text-foreground transition-colors"
             >
               About
             </button>
             <button
               onClick={() => scrollToSection("rooms")}
-              className="block w-full text-left px-4 py-3 hover:bg-muted rounded text-sm text-foreground"
+              className="block w-full text-left px-4 py-3 hover:bg-muted/80 text-sm text-foreground transition-colors"
             >
               Rooms
             </button>
             <button
               onClick={() => scrollToSection("gallery")}
-              className="block w-full text-left px-4 py-3 hover:bg-muted rounded text-sm text-foreground"
+              className="block w-full text-left px-4 py-3 hover:bg-muted/80 text-sm text-foreground transition-colors"
             >
               Gallery
             </button>
             <button
               onClick={() => scrollToSection("contact")}
-              className="block w-full text-left px-4 py-3 hover:bg-muted rounded text-sm text-foreground"
+              className="block w-full text-left px-4 py-3 hover:bg-muted/80 text-sm text-foreground transition-colors"
             >
               Contact
             </button>
-            <label className="block text-xs font-semibold text-muted-foreground px-4">Currency</label>
-            <CurrencySelector align="left" buttonSize="sm" />
-            <a
-              href="tel:+94771234567"
-              className="block w-full text-center px-4 py-3 bg-primary text-primary-foreground rounded mt-2 text-sm font-medium"
-            >
-              Call Now
-            </a>
           </div>
         )}
       </div>
