@@ -76,9 +76,11 @@ ${message}
       `,
     }
 
-    transporter.sendMail(guestMailOptions).catch((error: unknown) => {
+    try {
+      await transporter.sendMail(guestMailOptions)
+    } catch (error: unknown) {
       console.error("Guest confirmation email failed:", error)
-    })
+    }
 
     return NextResponse.json({ success: true })
   } catch (error) {
